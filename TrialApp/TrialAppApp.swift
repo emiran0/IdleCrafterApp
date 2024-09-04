@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct TrialAppApp: App {
+    @StateObject var gameManager = GameManager.shared
+    
+//    init() {
+//            MiningManager.shared.startMining()
+//    }
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(gameManager)
+//                .environmentObject(MiningManager.shared)
         }
     }
 }
+
