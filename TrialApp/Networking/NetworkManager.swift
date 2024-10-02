@@ -221,6 +221,25 @@ class NetworkManager {
                 .eraseToAnyPublisher()
         }
     
+    // MARK: - Fetch User Profile
+
+        func fetchUserProfile() -> AnyPublisher<UserProfile, Error> {
+            guard token != nil else {
+                return Fail(error: URLError(.userAuthenticationRequired)).eraseToAnyPublisher()
+            }
+
+            let request = createURLRequest(endpoint: "/users/me")
+
+            return URLSession.shared.dataTaskPublisher(for: request)
+                .tryMap { data, response in
+                    try self.handleResponse(data: data, response: response)
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .useDefaultKeys
+                    return try decoder.decode(UserProfile.self, from: data)
+                }
+                .eraseToAnyPublisher()
+        }
+    
     
     // MARK: - Tool Management
     
@@ -251,10 +270,9 @@ class NetworkManager {
             throw URLError(.badServerResponse)
         }
         if !(200...299).contains(httpResponse.statusCode) {
-            let message = String(data: data, encoding: .utf8) ?? "Unknown error"
-            print("API Error Response: \(message)") // Print error response
-            throw URLError(.badServerResponse, userInfo: [NSLocalizedDescriptionKey: message])
+            print("API Error Response: \(String(data: data, encoding: .utf8) ?? "")")
+            let error = URLError(.badServerResponse, userInfo: [NSUnderlyingErrorKey: data])
+            throw error
         }
-        // Success
     }
 }

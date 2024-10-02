@@ -56,6 +56,18 @@ struct CategoryView: View {
                     .cornerRadius(12)
                     .padding(.horizontal, 8)
                     
+                    CustomButton(
+                        text: "FARMING",
+                        iconName: "iconFarm",
+                        level: getCategoryLevel(category: "Farming"),
+                        progressValue: getCategoryProgress(category: "Farming"),
+                        destinationView: CategoryDetailView(categoryName: "Farming")
+                            .environmentObject(viewModel)
+                    )
+                    .background(Color.green)
+                    .cornerRadius(12)
+                    .padding(.horizontal, 8)
+                    
                     // Add more categories similarly...
                     
                     Spacer()
@@ -64,6 +76,9 @@ struct CategoryView: View {
             .padding(.vertical, 10)
             .navigationTitle("Categories")
             .background(Color(UIColor.systemBackground))
+        }
+        .onAppear {
+            viewModel.fetchData()
         }
     }
     
@@ -77,7 +92,6 @@ struct CategoryView: View {
         return 0.5
     }
 }
-
 //struct CustomButton: View {
 //    var text: String
 //    var iconName : String

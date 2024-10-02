@@ -7,11 +7,13 @@
 // Views/CategoryDetailView.swift
 
 import SwiftUI
+import Combine
 
 struct CategoryDetailView: View {
     let categoryName: String
     @EnvironmentObject var viewModel: CategoryViewModel
     @State private var selectedTool: ToolData?
+    @State private var timerCancellable: AnyCancellable?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,25 +28,63 @@ struct CategoryDetailView: View {
             .padding(.horizontal, 12)
 
             List {
-                Section(header: Text("Tools").foregroundColor(.primary)) {
+                Section(header: Text("Tools").foregroundColor(.primary).fontWeight(.bold)) {
                     ForEach(getTools(for: categoryName)) { tool in
                         Button(action: {
                             self.selectedTool = tool
                         }) {
                             HStack {
-                                Text(tool.displayName)
-                                    .foregroundColor(.primary)
+                                Image(tool.iconName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 50, height: 50)
+                                    .padding(8)
+                                    .padding(8)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 6)
+                                            .fill(Color(.lightGray))
+                                            .padding(6)
+                                    )
+                                VStack(alignment: .leading) {
+                                    Text(tool.displayName)
+                                        .foregroundColor(.primary)
+                                        .font(.title)
+                                    Text("Tier \(tool.tier ?? 1)")
+                                        .foregroundColor(.secondary)
+                                        .font(.subheadline)
+                                }
                                 Spacer()
-                                Text("Tier \(tool.tier ?? 1)")
-                                    .foregroundColor(.secondary)
                             }
+                            .padding(.horizontal, -10) // Adjust for List row padding
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
 
-                Section(header: Text("Items").foregroundColor(.primary)) {
+                Section(header: Text("Items").foregroundColor(.primary).fontWeight(.bold)) {
                     ForEach(getItems(for: categoryName)) { item in
-                        ItemRow(item: item)
+                        HStack {
+                            Image(item.iconName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
+                                .padding(8)
+                                .padding(8)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .fill(Color(.lightGray))
+                                        .padding(14)
+                                )
+                            VStack(alignment: .leading) {
+                                Text(item.itemDisplayName)
+                                    .foregroundColor(.primary)
+                                Text("Quantity: \(item.itemQuantity)")
+                                    .foregroundColor(.secondary)
+                                    .font(.subheadline)
+                            }
+                            Spacer()
+                        }
+                        .padding(.horizontal, -10)
                     }
                 }
             }
@@ -56,8 +96,28 @@ struct CategoryDetailView: View {
         }
         .navigationBarTitle(categoryName, displayMode: .inline)
         .background(Color(UIColor.systemBackground))
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            stopTimer()
+        }
+    }
+    
+    private func startTimer() {
+        timerCancellable = Timer.publish(every: 5, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                viewModel.fetchData()
+            }
     }
 
+    private func stopTimer() {
+        timerCancellable?.cancel()
+        timerCancellable = nil
+    }
+    
+    
     private func getTools(for category: String) -> [ToolData] {
         return viewModel.tools.filter { $0.uniqueToolName.lowercased().contains(category.lowercased()) }
     }
@@ -74,6 +134,8 @@ struct CategoryDetailView: View {
             return "iconCraft"
         case "woodcutting":
             return "iconWood"
+        case "farming":
+            return "iconFarm"
         // Add other cases
         default:
             return "defaultIcon"

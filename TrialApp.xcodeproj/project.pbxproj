@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37638C1F2CADB44000BD3DAA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37638C1E2CADB43E00BD3DAA /* ProfileView.swift */; };
 		378CAA932C76030D005A628F /* TrialAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378CAA922C76030D005A628F /* TrialAppApp.swift */; };
 		378CAA952C76030D005A628F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378CAA942C76030D005A628F /* ContentView.swift */; };
 		378CAA972C76030E005A628F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 378CAA962C76030E005A628F /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37638C1E2CADB43E00BD3DAA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		378CAA8F2C76030D005A628F /* TrialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		378CAA922C76030D005A628F /* TrialAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialAppApp.swift; sourceTree = "<group>"; };
 		378CAA942C76030D005A628F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		3754BC662C87A34A0095CAF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37638C1E2CADB43E00BD3DAA /* ProfileView.swift */,
 				37BD9F022CAC91F6004040D2 /* ToolDetailView.swift */,
 				37BD9EEA2CAC820F004040D2 /* CraftingView.swift */,
 				37BD9EDE2CAC5F59004040D2 /* CategoryDetailView.swift */,
@@ -329,6 +332,7 @@
 				37BD9ED42CAC48C1004040D2 /* AuthenticationView.swift in Sources */,
 				37BD9ED62CAC496C004040D2 /* MainTabView.swift in Sources */,
 				3790E3F32C81DE8600106C03 /* CategoryView.swift in Sources */,
+				37638C1F2CADB44000BD3DAA /* ProfileView.swift in Sources */,
 				379D4D992C87308E008ADA99 /* CategoryTopBoxView.swift in Sources */,
 				37BD9ED82CAC4AE8004040D2 /* CustomButton.swift in Sources */,
 			);

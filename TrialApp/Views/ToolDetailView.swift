@@ -13,15 +13,30 @@ struct ToolDetailView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(tool.displayName)
-                .font(.largeTitle)
-                .padding(.bottom, 5)
-
-            Text("Tier: \(tool.tier ?? 1)")
-                .padding(.bottom, 5)
-
-            Text("Status: \(tool.isEnabled == true ? "Enabled" : "Disabled")")
-                .padding(.bottom, 10)
+            HStack {
+                Image(tool.iconName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 70)
+                    .padding(8)
+                    .padding(8)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(.lightGray))
+                            .padding(10)
+                    )
+                VStack(alignment: .leading) {
+                    Text(tool.displayName)
+                        .font(.largeTitle)
+                        .padding(.bottom, 5)
+                    Text("Tier: \(tool.tier ?? 1)")
+                        .padding(.bottom, 5)
+                    Text("Status: \(tool.isEnabled == true ? "Enabled" : "Disabled")")
+                        .padding(.bottom, 10)
+                    Text("Occupied: \(tool.isOccupied == true ? "In Use" : "Ready")")
+                        .padding(.bottom, 10)
+                }
+            }
 
             if tool.isOccupied == true {
                 // Show ongoing crafting
@@ -116,7 +131,7 @@ struct ToolDetailView: View {
             }
         }
         .alert(isPresented: $viewModel.showCraftSuccess) {
-            Alert(title: Text("Success"), message: Text("Item crafted successfully."), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Success"), message: Text("Item crafting started!"), dismissButton: .default(Text("OK")))
         }
     }
 }

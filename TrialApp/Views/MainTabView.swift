@@ -49,9 +49,16 @@ struct MainTabView: View {
                 .tag(4)
         }
         .tint(.red)
-        .onAppear(perform: {
-            UITabBar.appearance().unselectedItemTintColor = .systemBackground
-        })
+        .onAppear {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.systemBackground
+
+            // Set unselected item tint color to adapt to Light and Dark Mode
+            UITabBar.appearance().unselectedItemTintColor = UIColor.label
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
 
@@ -60,33 +67,6 @@ struct MarketView: View {
         Text("Market Screen")
             .font(.largeTitle)
             .padding()
-    }
-}
-
-struct ProfileView: View {
-    @EnvironmentObject var authViewModel: AuthenticationViewModel
-
-    var body: some View {
-        VStack {
-
-            // Other profile details...
-
-            Spacer()
-
-            // Logout Button
-            Button(action: {
-                authViewModel.logout()
-            }) {
-                Text("Logout")
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.red)
-                    .cornerRadius(8)
-            }
-            .padding()
-        }
-        .padding()
     }
 }
 

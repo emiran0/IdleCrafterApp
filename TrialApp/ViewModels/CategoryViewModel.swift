@@ -15,10 +15,9 @@ class CategoryViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     private var cancellables = Set<AnyCancellable>()
-    private var timer: AnyCancellable?
     
     init() {
-        startTimer()
+        fetchData()
     }
     
     func fetchData() {
@@ -46,25 +45,9 @@ class CategoryViewModel: ObservableObject {
             }, receiveValue: { toolsResponse, itemsResponse in
                 self.tools = toolsResponse.toolsByCategory.values.flatMap { $0 }
                 self.items = itemsResponse.itemsByCategory.values.flatMap { $0 }
-//                print("Fetched Tools: \(self.tools)")
-//                print("Fetched Items: \(self.items)")
+                //                print("Fetched Tools: \(self.tools)")
+                //                print("Fetched Items: \(self.items)")
             })
             .store(in: &cancellables)
-    }
-    
-    func startTimer() {
-        timer = Timer.publish(every: 5, on: .main, in: .common)
-            .autoconnect()
-            .sink { _ in
-                self.fetchData()
-            }
-    }
-    
-    func stopTimer() {
-        timer?.cancel()
-    }
-    
-    deinit {
-        stopTimer()
     }
 }

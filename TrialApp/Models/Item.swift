@@ -12,6 +12,11 @@ struct ItemData: Codable, Identifiable {
     let itemQuantity: Int
     let itemDisplayName: String
 
+    // Add the computed property
+    var iconName: String {
+        return "icon_\(itemUniqueName)"
+    }
+
     enum CodingKeys: String, CodingKey {
         case itemUniqueName = "item_unique_name"
         case itemQuantity = "item_quantity"
@@ -26,4 +31,3 @@ struct UserItemsResponse: Codable {
         case itemsByCategory = "items_by_category"
     }
 }
-

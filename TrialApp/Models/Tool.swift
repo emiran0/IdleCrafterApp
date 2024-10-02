@@ -1,7 +1,7 @@
 //  TrialApp
 //
 //  Created by Emiran Kartal on 1.10.2024.
-
+//
 // Models/Tool.swift
 
 import Foundation
@@ -14,9 +14,14 @@ struct ToolData: Codable, Identifiable {
     var isEnabled: Bool?
     let isOccupied: Bool?
     let tier: Int?
-    let lastUsed: String? // Changed to String to handle date decoding
+    let lastUsed: String?
     let ongoingCraftingItemUniqueName: String?
     let ongoingRemainedQuantity: Int?
+
+    // Add the computed property
+    var iconName: String {
+        return "icon_\(uniqueToolName)"
+    }
 
     enum CodingKeys: String, CodingKey {
         case uniqueToolName = "unique_tool_name"

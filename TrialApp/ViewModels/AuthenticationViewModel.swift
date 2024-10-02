@@ -11,6 +11,7 @@ class AuthenticationViewModel: ObservableObject {
     @Published var isAuthenticated: Bool = false
     @Published var errorMessage: String?
     @Published var username: String = ""
+    @Published var showErrorAlert: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -20,19 +21,36 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     func login(username: String, password: String) {
-        NetworkManager.shared.login(username: username, password: password)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                case .finished:
+            NetworkManager.shared.login(username: username, password: password)
+                .receive(on: DispatchQueue.main)  // Ensure updates happen on the main thread
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        // Handle error
+                        self.errorMessage = self.parseError(error)
+                        self.showErrorAlert = true  // Trigger the alert
+                        print("Login failed: \(self.errorMessage ?? error.localizedDescription)")
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { _ in
+                    // Login successful
                     self.isAuthenticated = true
-                    self.username = username
+                    self.errorMessage = nil
+                    self.showErrorAlert = false
+                })
+                .store(in: &cancellables)
+        }
+
+        private func parseError(_ error: Error) -> String {
+            // Attempt to parse the error message from the server
+            if let urlError = error as? URLError, let data = urlError.userInfo[NSUnderlyingErrorKey] as? Data {
+                if let apiError = try? JSONDecoder().decode(APIErrorResponse.self, from: data) {
+                    return apiError.detail
                 }
-            }, receiveValue: { })
-            .store(in: &cancellables)
-    }
+            }
+            return error.localizedDescription
+        }
     
     func signup(username: String, email: String, password: String) {
         NetworkManager.shared.signup(username: username, email: email, password: password)
@@ -54,4 +72,8 @@ class AuthenticationViewModel: ObservableObject {
         isAuthenticated = false
         username = ""
     }
+}
+
+struct APIErrorResponse: Decodable {
+    let detail: String
 }
