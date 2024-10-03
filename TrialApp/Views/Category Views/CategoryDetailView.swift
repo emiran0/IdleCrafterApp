@@ -94,7 +94,6 @@ struct CategoryDetailView: View {
                     .environmentObject(viewModel)
             }
         }
-        .navigationBarTitle(categoryName, displayMode: .inline)
         .background(Color(UIColor.systemBackground))
         .onAppear {
             startTimer()

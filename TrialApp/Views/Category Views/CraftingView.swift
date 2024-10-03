@@ -49,7 +49,10 @@ struct CraftingView: View {
                                 viewModel.craftTool(toolUniqueName: tool.uniqueToolName)
                             }) {
                                 Text("Craft")
-                                    .foregroundColor(.blue)
+                                    .foregroundStyle(Color.primary)
+                                    .padding(8)
+                                    .background(.blue)
+                                    .cornerRadius(6)
                             }
                             .padding(.top, 5)
                         }

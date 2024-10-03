@@ -78,10 +78,4 @@ struct ChatView: View {
     }
 }
 
-struct InfoView: View {
-    var body: some View {
-        Text("Info Screen")
-            .font(.largeTitle)
-            .padding()
-    }
-}
+

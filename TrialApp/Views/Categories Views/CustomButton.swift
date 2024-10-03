@@ -41,7 +41,7 @@ struct CustomButton<Destination: View>: View {
                 }
             }
             .padding(5)
-            .frame(height: 75)
+            .frame(height: 80)
             .cornerRadius(20)
         }
     }

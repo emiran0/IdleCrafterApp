@@ -132,6 +132,7 @@ struct ToolDetailView: View {
         }
         .alert(isPresented: $viewModel.showCraftSuccess) {
             Alert(title: Text("Success"), message: Text("Item crafting started!"), dismissButton: .default(Text("OK")))
+            
         }
     }
 }

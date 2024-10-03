@@ -25,6 +25,10 @@
 		37BD9EDF2CAC5F59004040D2 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD9EDE2CAC5F59004040D2 /* CategoryDetailView.swift */; };
 		37BD9EEB2CAC8210004040D2 /* CraftingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD9EEA2CAC820F004040D2 /* CraftingView.swift */; };
 		37BD9F032CAC91F7004040D2 /* ToolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD9F022CAC91F6004040D2 /* ToolDetailView.swift */; };
+		37CF9B112CAEB82C0073EF02 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF9B102CAEB82C0073EF02 /* InfoView.swift */; };
+		37CF9B142CAEE6580073EF02 /* HowToGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF9B132CAEE6500073EF02 /* HowToGuideView.swift */; };
+		37CF9B162CAEE67F0073EF02 /* ItemsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF9B152CAEE6790073EF02 /* ItemsInfoView.swift */; };
+		37CF9B182CAEE69F0073EF02 /* ToolsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF9B172CAEE6960073EF02 /* ToolsInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,10 @@
 		37BD9EDE2CAC5F59004040D2 /* CategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailView.swift; sourceTree = "<group>"; };
 		37BD9EEA2CAC820F004040D2 /* CraftingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraftingView.swift; sourceTree = "<group>"; };
 		37BD9F022CAC91F6004040D2 /* ToolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolDetailView.swift; sourceTree = "<group>"; };
+		37CF9B102CAEB82C0073EF02 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		37CF9B132CAEE6500073EF02 /* HowToGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToGuideView.swift; sourceTree = "<group>"; };
+		37CF9B152CAEE6790073EF02 /* ItemsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsInfoView.swift; sourceTree = "<group>"; };
+		37CF9B172CAEE6960073EF02 /* ToolsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -103,17 +111,13 @@
 		3754BC662C87A34A0095CAF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				37638C1E2CADB43E00BD3DAA /* ProfileView.swift */,
-				37BD9F022CAC91F6004040D2 /* ToolDetailView.swift */,
-				37BD9EEA2CAC820F004040D2 /* CraftingView.swift */,
-				37BD9EDE2CAC5F59004040D2 /* CategoryDetailView.swift */,
-				37BD9ED92CAC4B21004040D2 /* ProgressBar.swift */,
-				37BD9ED72CAC4AE4004040D2 /* CustomButton.swift */,
-				37BD9ED52CAC4966004040D2 /* MainTabView.swift */,
-				37BD9ED32CAC48BA004040D2 /* AuthenticationView.swift */,
 				378CAA942C76030D005A628F /* ContentView.swift */,
-				3790E3F22C81DE8600106C03 /* CategoryView.swift */,
-				379D4D982C87308E008ADA99 /* CategoryTopBoxView.swift */,
+				37CF9B122CAEE3BD0073EF02 /* Information Views */,
+				37CF9B192CAEE7360073EF02 /* Profile Views */,
+				37CF9B1A2CAEE7540073EF02 /* Login Views */,
+				37CF9B1B2CAEE7730073EF02 /* Category Views */,
+				37CF9B1D2CAEEA0B0073EF02 /* Tab Views */,
+				37CF9B1C2CAEE7BA0073EF02 /* Categories Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,6 +189,70 @@
 				378CAAAF2C76030E005A628F /* TrialAppUITestsLaunchTests.swift */,
 			);
 			path = TrialAppUITests;
+			sourceTree = "<group>";
+		};
+		37CF9B122CAEE3BD0073EF02 /* Information Views */ = {
+			isa = PBXGroup;
+			children = (
+				37CF9B172CAEE6960073EF02 /* ToolsInfoView.swift */,
+				37CF9B152CAEE6790073EF02 /* ItemsInfoView.swift */,
+				37CF9B132CAEE6500073EF02 /* HowToGuideView.swift */,
+				37CF9B102CAEB82C0073EF02 /* InfoView.swift */,
+			);
+			path = "Information Views";
+			sourceTree = "<group>";
+		};
+		37CF9B192CAEE7360073EF02 /* Profile Views */ = {
+			isa = PBXGroup;
+			children = (
+				37638C1E2CADB43E00BD3DAA /* ProfileView.swift */,
+			);
+			path = "Profile Views";
+			sourceTree = "<group>";
+		};
+		37CF9B1A2CAEE7540073EF02 /* Login Views */ = {
+			isa = PBXGroup;
+			children = (
+				37BD9ED32CAC48BA004040D2 /* AuthenticationView.swift */,
+			);
+			path = "Login Views";
+			sourceTree = "<group>";
+		};
+		37CF9B1B2CAEE7730073EF02 /* Category Views */ = {
+			isa = PBXGroup;
+			children = (
+				37CF9B1E2CAEEA2E0073EF02 /* Detailed Tool Views */,
+				37BD9EEA2CAC820F004040D2 /* CraftingView.swift */,
+				37BD9EDE2CAC5F59004040D2 /* CategoryDetailView.swift */,
+				379D4D982C87308E008ADA99 /* CategoryTopBoxView.swift */,
+			);
+			path = "Category Views";
+			sourceTree = "<group>";
+		};
+		37CF9B1C2CAEE7BA0073EF02 /* Categories Views */ = {
+			isa = PBXGroup;
+			children = (
+				37BD9ED72CAC4AE4004040D2 /* CustomButton.swift */,
+				37BD9ED92CAC4B21004040D2 /* ProgressBar.swift */,
+				3790E3F22C81DE8600106C03 /* CategoryView.swift */,
+			);
+			path = "Categories Views";
+			sourceTree = "<group>";
+		};
+		37CF9B1D2CAEEA0B0073EF02 /* Tab Views */ = {
+			isa = PBXGroup;
+			children = (
+				37BD9ED52CAC4966004040D2 /* MainTabView.swift */,
+			);
+			path = "Tab Views";
+			sourceTree = "<group>";
+		};
+		37CF9B1E2CAEEA2E0073EF02 /* Detailed Tool Views */ = {
+			isa = PBXGroup;
+			children = (
+				37BD9F022CAC91F6004040D2 /* ToolDetailView.swift */,
+			);
+			path = "Detailed Tool Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,10 +399,14 @@
 				378CAA932C76030D005A628F /* TrialAppApp.swift in Sources */,
 				37BD9ED42CAC48C1004040D2 /* AuthenticationView.swift in Sources */,
 				37BD9ED62CAC496C004040D2 /* MainTabView.swift in Sources */,
+				37CF9B142CAEE6580073EF02 /* HowToGuideView.swift in Sources */,
+				37CF9B162CAEE67F0073EF02 /* ItemsInfoView.swift in Sources */,
 				3790E3F32C81DE8600106C03 /* CategoryView.swift in Sources */,
 				37638C1F2CADB44000BD3DAA /* ProfileView.swift in Sources */,
 				379D4D992C87308E008ADA99 /* CategoryTopBoxView.swift in Sources */,
+				37CF9B112CAEB82C0073EF02 /* InfoView.swift in Sources */,
 				37BD9ED82CAC4AE8004040D2 /* CustomButton.swift in Sources */,
+				37CF9B182CAEE69F0073EF02 /* ToolsInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

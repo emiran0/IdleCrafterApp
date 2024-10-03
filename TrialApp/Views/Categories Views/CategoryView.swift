@@ -74,7 +74,6 @@ struct CategoryView: View {
                 }
             }
             .padding(.vertical, 10)
-            .navigationTitle("Categories")
             .background(Color(UIColor.systemBackground))
         }
         .onAppear {
