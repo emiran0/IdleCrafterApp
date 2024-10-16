@@ -11,6 +11,7 @@ struct ItemData: Codable, Identifiable {
     let itemUniqueName: String
     let itemQuantity: Int
     let itemDisplayName: String
+    let itemGoldValue: Double
 
     // Add the computed property
     var iconName: String {
@@ -21,6 +22,7 @@ struct ItemData: Codable, Identifiable {
         case itemUniqueName = "item_unique_name"
         case itemQuantity = "item_quantity"
         case itemDisplayName = "item_display_name"
+        case itemGoldValue = "item_gold_value"
     }
 }
 

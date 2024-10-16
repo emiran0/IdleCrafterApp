@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		373DCB142CB41F3A00D35819 /* MainMarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373DCB132CB41F2C00D35819 /* MainMarketView.swift */; };
+		373DCB162CB4200B00D35819 /* MarketItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373DCB152CB41FEE00D35819 /* MarketItemsView.swift */; };
 		37638C1F2CADB44000BD3DAA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37638C1E2CADB43E00BD3DAA /* ProfileView.swift */; };
 		378CAA932C76030D005A628F /* TrialAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378CAA922C76030D005A628F /* TrialAppApp.swift */; };
 		378CAA952C76030D005A628F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378CAA942C76030D005A628F /* ContentView.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		373DCB132CB41F2C00D35819 /* MainMarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMarketView.swift; sourceTree = "<group>"; };
+		373DCB152CB41FEE00D35819 /* MarketItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketItemsView.swift; sourceTree = "<group>"; };
 		37638C1E2CADB43E00BD3DAA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		378CAA8F2C76030D005A628F /* TrialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		378CAA922C76030D005A628F /* TrialAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialAppApp.swift; sourceTree = "<group>"; };
@@ -108,10 +112,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		373DCB122CB41F1A00D35819 /* Market Views */ = {
+			isa = PBXGroup;
+			children = (
+				373DCB152CB41FEE00D35819 /* MarketItemsView.swift */,
+				373DCB132CB41F2C00D35819 /* MainMarketView.swift */,
+			);
+			path = "Market Views";
+			sourceTree = "<group>";
+		};
 		3754BC662C87A34A0095CAF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				378CAA942C76030D005A628F /* ContentView.swift */,
+				373DCB122CB41F1A00D35819 /* Market Views */,
 				37CF9B122CAEE3BD0073EF02 /* Information Views */,
 				37CF9B192CAEE7360073EF02 /* Profile Views */,
 				37CF9B1A2CAEE7540073EF02 /* Login Views */,
@@ -398,7 +412,9 @@
 				37BD9EDA2CAC4B24004040D2 /* ProgressBar.swift in Sources */,
 				378CAA932C76030D005A628F /* TrialAppApp.swift in Sources */,
 				37BD9ED42CAC48C1004040D2 /* AuthenticationView.swift in Sources */,
+				373DCB162CB4200B00D35819 /* MarketItemsView.swift in Sources */,
 				37BD9ED62CAC496C004040D2 /* MainTabView.swift in Sources */,
+				373DCB142CB41F3A00D35819 /* MainMarketView.swift in Sources */,
 				37CF9B142CAEE6580073EF02 /* HowToGuideView.swift in Sources */,
 				37CF9B162CAEE67F0073EF02 /* ItemsInfoView.swift in Sources */,
 				3790E3F32C81DE8600106C03 /* CategoryView.swift in Sources */,

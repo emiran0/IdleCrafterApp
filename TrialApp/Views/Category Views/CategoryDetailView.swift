@@ -33,7 +33,7 @@ struct CategoryDetailView: View {
                         Button(action: {
                             self.selectedTool = tool
                         }) {
-                            HStack {
+                            HStack(alignment: .center) {
                                 Image(tool.iconName)
                                     .resizable()
                                     .scaledToFit()
@@ -54,10 +54,15 @@ struct CategoryDetailView: View {
                                         .font(.subheadline)
                                 }
                                 Spacer()
+                                
+                                Text(tool.isOccupied ?? false ? "Occupied" : "Available")
+                                    .foregroundColor(tool.isOccupied ?? false ? .red : .green)
+                                    .font(.subheadline)
                             }
                             .padding(.horizontal, -10) // Adjust for List row padding
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .frame(maxWidth: .infinity)
                     }
                 }
 

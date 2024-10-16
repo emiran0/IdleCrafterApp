@@ -62,13 +62,6 @@ struct MainTabView: View {
     }
 }
 
-struct MarketView: View {
-    var body: some View {
-        Text("Market Screen")
-            .font(.largeTitle)
-            .padding()
-    }
-}
 
 struct ChatView: View {
     var body: some View {
