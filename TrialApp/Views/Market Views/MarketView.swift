@@ -9,19 +9,17 @@ import SwiftUI
 
 struct MarketView: View {
     @StateObject private var viewModel = MarketViewModel()
-    @EnvironmentObject var categoryViewModel: CategoryViewModel // For items data
+    @EnvironmentObject var categoryViewModel: CategoryViewModel
 
-    @State private var selectedItem: ItemData?
-    @State private var selectedListing: MarketListing?
+    @State private var path = NavigationPath()
     @State private var isPresentingListItemSheet = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path) {
             VStack {
                 // Search Bar
                 SearchBar(text: $viewModel.searchQuery, placeholder: "Search items")
 
-                // Listings Section
                 if viewModel.isLoading {
                     ProgressView("Loading listings...")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -31,9 +29,7 @@ struct MarketView: View {
                 } else {
                     List {
                         ForEach(viewModel.filteredListings) { listing in
-                            Button(action: {
-                                selectedListing = listing
-                            }) {
+                            NavigationLink(value: listing) {
                                 VStack(alignment: .leading) {
                                     Text(listing.itemDisplayName)
                                         .font(.headline)
@@ -41,7 +37,7 @@ struct MarketView: View {
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
                                     Text("Quantity: \(listing.quantity)")
-                                    Text("Price: \(listing.price, specifier: "%.2f") gold each")
+                                    Text("Price: \(listing.price, specifier: "%.0f") gold each")
                                 }
                             }
                         }
@@ -70,20 +66,10 @@ struct MarketView: View {
             .onAppear {
                 viewModel.fetchMarketListings()
             }
-            // Navigate to Listing Detail View
-            .background(
-                NavigationLink(
-                    destination: ListingDetailView(listing: selectedListing).environmentObject(viewModel),
-                    isActive: Binding(
-                        get: { selectedListing != nil },
-                        set: { if !$0 { selectedListing = nil } }
-                    )
-                ) {
-                    EmptyView()
-                }
-            )
+            .navigationDestination(for: MarketListing.self) { listing in
+                ListingDetailView(listing: listing)
+                    .environmentObject(viewModel)
+            }
         }
     }
-
 }
-

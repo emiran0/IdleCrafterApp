@@ -1,3 +1,10 @@
+//
+//  ListItemView.swift
+//  TrialApp
+//
+//  Created by Emiran Kartal on 22.10.2024.
+//
+
 import SwiftUI
 
 struct ListItemView: View {
@@ -8,7 +15,6 @@ struct ListItemView: View {
     @State private var selectedItem: ItemData?
     @State private var quantity: String = ""
     @State private var price: String = ""
-    @State private var expireDate: Date = Date().addingTimeInterval(86400) // Default to 1 day later
     @State private var showAlert = false
     @State private var alertMessage = ""
 
@@ -30,7 +36,6 @@ struct ListItemView: View {
                             .keyboardType(.numberPad)
                         TextField("Price per Item", text: $price)
                             .keyboardType(.decimalPad)
-                        DatePicker("Expire Date", selection: $expireDate, displayedComponents: [.date, .hourAndMinute])
                     }
                 }
             }
@@ -59,17 +64,25 @@ struct ListItemView: View {
             return
         }
 
+        if quantity > selectedItem.itemQuantity {
+            alertMessage = "You cannot list more than you have in your inventory."
+            showAlert = true
+            return
+        }
+
         let request = ListItemRequest(
             itemUniqueName: selectedItem.itemUniqueName,
             quantity: quantity,
             price: price,
-            expireDate: expireDate
+            expireDate: nil
         )
 
         viewModel.listItemForSale(request: request) { result in
             switch result {
             case .success(_):
                 alertMessage = "Item listed for sale."
+                viewModel.fetchMarketListings() // Refresh market listings
+                categoryViewModel.fetchData() // Refresh inventory
             case .failure(let error):
                 alertMessage = error.localizedDescription
             }

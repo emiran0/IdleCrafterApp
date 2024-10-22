@@ -18,7 +18,24 @@ class AuthenticationViewModel: ObservableObject {
     init() {
         // Check if token exists
         isAuthenticated = NetworkManager.shared.token != nil
+        NotificationCenter.default.publisher(for: .didReceiveUnauthorized)
+                    .sink { [weak self] _ in
+                        self?.handleUnauthorized()
+                    }
+                    .store(in: &cancellables)
     }
+    
+    func handleUnauthorized() {
+            // Perform logout actions
+            DispatchQueue.main.async {
+                if self.isAuthenticated {
+                    self.isAuthenticated = false
+                    self.token = nil
+                    self.errorMessage = "Session expired. Please log in again."
+                    self.showErrorAlert = true
+                }
+            }
+        }
     
     func login(username: String, password: String) {
             NetworkManager.shared.login(username: username, password: password)
@@ -72,6 +89,12 @@ class AuthenticationViewModel: ObservableObject {
         isAuthenticated = false
         username = ""
     }
+    
+    var token: String? {
+            get { NetworkManager.shared.token }
+            set { NetworkManager.shared.token = newValue }
+        }
+    
 }
 
 struct APIErrorResponse: Decodable {

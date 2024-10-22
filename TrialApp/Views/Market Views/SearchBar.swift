@@ -1,3 +1,11 @@
+//
+//  SearchBar.swift
+//  TrialApp
+//
+//  Created by Emiran Kartal on 22.10.2024.
+//
+
+
 import SwiftUI
 
 struct SearchBar: UIViewRepresentable {

@@ -12,6 +12,9 @@ class CraftingViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
+    @Published var showAlert: Bool = false
+    @Published var alertMessage: String = ""
+    
     private var cancellables = Set<AnyCancellable>()
     
     func fetchCraftableTools() {
@@ -46,6 +49,10 @@ class CraftingViewModel: ObservableObject {
                 case .finished:
                     print("Successfully crafted tool: \(toolUniqueName)")
                     // Optionally refresh data or update UI
+                    self.alertMessage = "Tool crafted successfully!"
+                    self.showAlert = true
+                    
+                    self.fetchCraftableTools()
                 }
             }, receiveValue: { })
             .store(in: &cancellables)

@@ -13,6 +13,8 @@ class NetworkManager {
     
     private let baseURL = "http://127.0.0.1:8000" // Replace with your actual API URL
     
+    
+    
     // Token is now accessible
     var token: String? {
         get {
@@ -263,6 +265,94 @@ class NetworkManager {
             .eraseToAnyPublisher()
     }
     
+    
+    // MARK: - Market Endpoints
+
+        // 2.1.1 Fetch Market Listings
+        func fetchMarketListings() -> AnyPublisher<MarketListingsResponse, Error> {
+            let request = createURLRequest(endpoint: "/market/listings")
+
+            return URLSession.shared.dataTaskPublisher(for: request)
+                .tryMap { data, response in
+                    try self.handleResponse(data: data, response: response)
+                    let decoder = JSONDecoder()
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+                    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+                    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                    return try decoder.decode(MarketListingsResponse.self, from: data)
+                }
+                .eraseToAnyPublisher()
+        }
+
+        // 2.1.2 Fetch User's Listings
+        func fetchUserMarketListings() -> AnyPublisher<MarketListingsResponse, Error> {
+            let request = createURLRequest(endpoint: "/market/my-listings")
+
+            return URLSession.shared.dataTaskPublisher(for: request)
+                .tryMap { data, response in
+                    try self.handleResponse(data: data, response: response)
+                    let decoder = JSONDecoder()
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+                    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+                    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                    return try decoder.decode(MarketListingsResponse.self, from: data)
+                }
+                .eraseToAnyPublisher()
+        }
+
+        // 2.1.3 List Item for Sale
+        func listItemForSale(requestBody: ListItemRequest) -> AnyPublisher<ListItemResponse, Error> {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+
+            guard let body = try? encoder.encode(requestBody) else {
+                return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+            }
+
+            let request = createURLRequest(endpoint: "/market/list", method: "POST", body: body)
+
+            return URLSession.shared.dataTaskPublisher(for: request)
+                .tryMap { data, response in
+                    try self.handleResponse(data: data, response: response)
+                    return try JSONDecoder().decode(ListItemResponse.self, from: data)
+                }
+                .eraseToAnyPublisher()
+        }
+
+        // 2.1.4 Buy Item
+        func buyMarketItem(requestBody: BuyItemRequest) -> AnyPublisher<BuyItemResponse, Error> {
+            guard let body = try? JSONEncoder().encode(requestBody) else {
+                return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+            }
+
+            let request = createURLRequest(endpoint: "/market/buy", method: "POST", body: body)
+
+            return URLSession.shared.dataTaskPublisher(for: request)
+                .tryMap { data, response in
+                    try self.handleResponse(data: data, response: response)
+                    return try JSONDecoder().decode(BuyItemResponse.self, from: data)
+                }
+                .eraseToAnyPublisher()
+        }
+
+        // 2.1.5 Cancel Listing
+        func cancelMarketListing(requestBody: CancelListingRequest) -> AnyPublisher<CancelListingResponse, Error> {
+            guard let body = try? JSONEncoder().encode(requestBody) else {
+                return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+            }
+
+            let request = createURLRequest(endpoint: "/market/my-listings/cancel", method: "DELETE", body: body)
+
+            return URLSession.shared.dataTaskPublisher(for: request)
+                .tryMap { data, response in
+                    try self.handleResponse(data: data, response: response)
+                    return try JSONDecoder().decode(CancelListingResponse.self, from: data)
+                }
+                .eraseToAnyPublisher()
+        }
+    
     // MARK: - Helper Methods
     
     private func handleResponse(data: Data, response: URLResponse) throws {
@@ -270,9 +360,22 @@ class NetworkManager {
             throw URLError(.badServerResponse)
         }
         if !(200...299).contains(httpResponse.statusCode) {
-            print("API Error Response: \(String(data: data, encoding: .utf8) ?? "")")
-            let error = URLError(.badServerResponse, userInfo: [NSUnderlyingErrorKey: data])
-            throw error
+            let message = String(data: data, encoding: .utf8) ?? "Unknown error"
+            print("API Error Response: \(message)")
+            
+            if httpResponse.statusCode == 401 {
+                // Post a notification or update authentication state
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .didReceiveUnauthorized, object: nil)
+                }
+            }
+            
+            throw URLError(.badServerResponse, userInfo: [NSLocalizedDescriptionKey: message])
         }
+        // Success
     }
+}
+
+extension Notification.Name {
+    static let didReceiveUnauthorized = Notification.Name("didReceiveUnauthorized")
 }

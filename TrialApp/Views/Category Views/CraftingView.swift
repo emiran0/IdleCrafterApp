@@ -68,5 +68,8 @@ struct CraftingView: View {
         }
         .navigationTitle("Crafting")
         .background(Color(UIColor.systemBackground))
+        .alert(isPresented: $viewModel.showAlert) {
+                    Alert(title: Text("Crafting"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+                }
     }
 }

@@ -40,6 +40,7 @@ struct MainTabView: View {
                     Text("Market")
                 }
                 .tag(3)
+                .environmentObject(categoryViewModel)
 
             ProfileView()
                 .tabItem {

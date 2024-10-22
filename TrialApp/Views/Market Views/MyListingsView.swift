@@ -1,8 +1,15 @@
+//
+//  MyListingsView.swift
+//  TrialApp
+//
+//  Created by Emiran Kartal on 22.10.2024.
+//
+
+
 import SwiftUI
 
 struct MyListingsView: View {
     @EnvironmentObject var viewModel: MarketViewModel
-    @EnvironmentObject var authViewModel: AuthenticationViewModel
 
     var body: some View {
         VStack {
@@ -23,7 +30,7 @@ struct MyListingsView: View {
                                 Text(listing.itemDisplayName)
                                     .font(.headline)
                                 Text("Quantity: \(listing.quantity)")
-                                Text("Price: \(listing.price, specifier: "%.2f") gold each")
+                                Text("Price: \(listing.price, specifier: "%.0f") gold each")
                             }
                             Spacer()
                             Button(action: {
@@ -42,8 +49,8 @@ struct MyListingsView: View {
         .onAppear {
             viewModel.fetchUserListings()
         }
-        .alert(item: $viewModel.alertMessage) { message in
-            Alert(title: Text("Error"), message: Text(message), dismissButton: .default(Text("OK")))
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
         }
     }
 
@@ -53,10 +60,12 @@ struct MyListingsView: View {
             switch result {
             case .success(let response):
                 print(response.message)
+                viewModel.myListings.removeAll()
                 viewModel.fetchUserListings() // Refresh listings after cancellation
             case .failure(let error):
                 print("Error cancelling listing: \(error.localizedDescription)")
                 viewModel.alertMessage = error.localizedDescription
+                viewModel.showAlert = true
             }
         }
     }

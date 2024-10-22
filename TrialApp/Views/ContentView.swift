@@ -12,13 +12,26 @@ struct ContentView: View {
     @StateObject private var categoryViewModel = CategoryViewModel()
     
     var body: some View {
-        if authViewModel.isAuthenticated {
-            MainTabView()
-                .environmentObject(authViewModel)
-                .environmentObject(categoryViewModel)
-        } else {
-            AuthenticationView()
-                .environmentObject(authViewModel)
+        Group{
+            if authViewModel.isAuthenticated {
+                MainTabView()
+                    .environmentObject(authViewModel)
+                    .environmentObject(categoryViewModel)
+            } else {
+                AuthenticationView()
+                    .environmentObject(authViewModel)
+            }
+        }
+        .alert(isPresented: $authViewModel.showErrorAlert) {
+            Alert(
+                title: Text("Session Expired"),
+                message: Text(authViewModel.errorMessage ?? "Please log in again."),
+                dismissButton: .default(Text("OK")) {
+                    // Reset error message and alert flag if needed
+                    authViewModel.errorMessage = nil
+                    authViewModel.showErrorAlert = false
+                }
+            )
         }
     }
 }

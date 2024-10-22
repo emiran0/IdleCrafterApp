@@ -1,3 +1,11 @@
+//
+//  MarketViewModel.swift
+//  TrialApp
+//
+//  Created by Emiran Kartal on 22.10.2024.
+//
+
+
 import Foundation
 import Combine
 
@@ -8,6 +16,8 @@ class MarketViewModel: ObservableObject {
     @Published var searchQuery: String = ""
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var alertMessage: String = ""
+    @Published var showAlert: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -45,17 +55,13 @@ class MarketViewModel: ObservableObject {
     }
 
     func fetchUserListings() {
-        isLoading = true
-        errorMessage = nil
-
         NetworkManager.shared.fetchUserMarketListings()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
-                self?.isLoading = false
                 switch completion {
                 case .failure(let error):
-                    self?.errorMessage = error.localizedDescription
                     print("Error fetching user market listings: \(error)")
+                    // Handle error if necessary
                 case .finished:
                     break
                 }

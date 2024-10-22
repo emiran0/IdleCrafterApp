@@ -1,3 +1,11 @@
+//
+//  ListingDetailView.swift
+//  TrialApp
+//
+//  Created by Emiran Kartal on 22.10.2024.
+//
+
+
 import SwiftUI
 
 struct ListingDetailView: View {
@@ -54,12 +62,20 @@ struct ListingDetailView: View {
             showAlert = true
             return
         }
-
+        
+        if quantity > listing.quantity {
+            alertMessage = "You cannot buy more than the available quantity."
+            showAlert = true
+            return
+        }
+        
         let request = BuyItemRequest(listingId: listing.id, quantity: quantity)
+        print(listing.id, quantity)
         viewModel.buyMarketItem(request: request) { result in
             switch result {
             case .success(let response):
                 alertMessage = response.message
+                viewModel.fetchMarketListings() // Refresh listings after purchase
             case .failure(let error):
                 alertMessage = error.localizedDescription
             }
