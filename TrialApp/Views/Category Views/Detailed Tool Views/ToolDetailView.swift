@@ -97,7 +97,7 @@ struct ToolDetailView: View {
                             Button(action: {
                                 if let quantityString = viewModel.desiredQuantities[craftableItem.id],
                                    let quantity = Int(quantityString), quantity > 0 {
-                                    viewModel.craftItem(itemUniqueName: craftableItem.outputItemUniqueName, quantity: quantity)
+                                    viewModel.craftItem(toolUniqueName: tool.uniqueToolName, itemUniqueName: craftableItem.outputItemUniqueName, quantity: quantity)
                                 }
                             }) {
                                 Text("Craft")

@@ -37,7 +37,7 @@ class ToolDetailViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func craftItem(itemUniqueName: String, quantity: Int) {
+    func craftItem(toolUniqueName: String, itemUniqueName: String, quantity: Int) {
         NetworkManager.shared.craftItem(itemUniqueName: itemUniqueName, quantity: quantity)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -47,6 +47,7 @@ class ToolDetailViewModel: ObservableObject {
                     print("Error crafting item: \(error)")
                 case .finished:
                     print("Successfully crafted item: \(itemUniqueName)")
+                    self.fetchItemCraftingRecipes(for: toolUniqueName)
                     self.showCraftSuccess = true
                 }
             }, receiveValue: { })

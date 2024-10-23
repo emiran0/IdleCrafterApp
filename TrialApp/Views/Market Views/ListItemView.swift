@@ -31,11 +31,30 @@ struct ListItemView: View {
                 }
 
                 if selectedItem != nil {
-                    Section(header: Text("Details")) {
-                        TextField("Quantity", text: $quantity)
-                            .keyboardType(.numberPad)
-                        TextField("Price per Item", text: $price)
-                            .keyboardType(.decimalPad)
+                    HStack{
+                        Spacer()
+                        Text("Your Selected Item Quantity : ")
+                            .font(.subheadline)
+                            .foregroundStyle(.primary)
+                        Text("\(selectedItem!.itemQuantity)")
+                            .font(.headline)
+                            .foregroundStyle(Color.green)
+                        Spacer()
+                    }
+                    
+                    Section(header: Text("Enter Listing Details")) {
+                        VStack{
+                            HStack{
+                                Text("Quantity")
+                                TextField("Enter here", text: $quantity)
+                                    .keyboardType(.numberPad)
+                            }
+                            HStack{
+                                Text("Price per Item")
+                                TextField("Enter here", text: $price)
+                                    .keyboardType(.decimalPad)
+                            }
+                        }
                     }
                 }
             }
