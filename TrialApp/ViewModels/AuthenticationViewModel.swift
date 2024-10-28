@@ -88,6 +88,9 @@ class AuthenticationViewModel: ObservableObject {
         NetworkManager.shared.logout()
         isAuthenticated = false
         username = ""
+        
+        // Disconnect WebSocket
+        WebSocketManager.shared.disconnect()
     }
     
     var token: String? {

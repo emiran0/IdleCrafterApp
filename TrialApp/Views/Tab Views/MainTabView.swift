@@ -20,12 +20,13 @@ struct MainTabView: View {
                 }
                 .tag(0)
 
-            ChatView()
-                .tabItem {
-                    Image(systemName: "message.fill")
-                    Text("Chat")
-                }
-                .tag(1)
+            NavigationView {
+                ChatView()
+            }
+            .tabItem {
+                Image(systemName: "message.fill")
+                Text("Chat")
+            }
 
             CategoryView()
                 .tabItem {
@@ -63,13 +64,5 @@ struct MainTabView: View {
     }
 }
 
-
-struct ChatView: View {
-    var body: some View {
-        Text("Chat Screen")
-            .font(.largeTitle)
-            .padding()
-    }
-}
 
 
