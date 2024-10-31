@@ -8,29 +8,29 @@ import Foundation
 import Combine
 
 class ProfileViewModel: ObservableObject {
-    @Published var userProfile: UserProfile?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var userProfile: UserProfile?
 
     private var cancellables = Set<AnyCancellable>()
 
     func fetchUserProfile() {
         isLoading = true
+        errorMessage = nil
 
         NetworkManager.shared.fetchUserProfile()
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                self.isLoading = false
+            .sink(receiveCompletion: { [weak self] completion in
+                self?.isLoading = false
                 switch completion {
                 case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                    print("Error fetching user profile: \(error)")
+                    self?.errorMessage = error.localizedDescription
+                    print("Error fetching profile: \(error.localizedDescription)")
                 case .finished:
                     break
                 }
-            }, receiveValue: { profile in
-                self.userProfile = profile
-                print("Fetched User Profile: \(profile)")
+            }, receiveValue: { [weak self] profile in
+                self?.userProfile = profile
             })
             .store(in: &cancellables)
     }

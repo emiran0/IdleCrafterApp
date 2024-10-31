@@ -31,6 +31,9 @@
 		37BD9EEB2CAC8210004040D2 /* CraftingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD9EEA2CAC820F004040D2 /* CraftingView.swift */; };
 		37BD9F032CAC91F7004040D2 /* ToolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD9F022CAC91F6004040D2 /* ToolDetailView.swift */; };
 		37C820BD2CCFE332006BF393 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C820BC2CCFE332006BF393 /* ChatView.swift */; };
+		37CA554F2CD3CE950031E65A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA554E2CD3CE950031E65A /* SettingsView.swift */; };
+		37CA55532CD3CEC80031E65A /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA55522CD3CEC80031E65A /* ChangePasswordView.swift */; };
+		37CA55552CD3CED40031E65A /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA55542CD3CED40031E65A /* PrivacyPolicyView.swift */; };
 		37CF9B112CAEB82C0073EF02 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF9B102CAEB82C0073EF02 /* InfoView.swift */; };
 		37CF9B142CAEE6580073EF02 /* HowToGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF9B132CAEE6500073EF02 /* HowToGuideView.swift */; };
 		37CF9B162CAEE67F0073EF02 /* ItemsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF9B152CAEE6790073EF02 /* ItemsInfoView.swift */; };
@@ -83,6 +86,9 @@
 		37BD9EEA2CAC820F004040D2 /* CraftingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraftingView.swift; sourceTree = "<group>"; };
 		37BD9F022CAC91F6004040D2 /* ToolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolDetailView.swift; sourceTree = "<group>"; };
 		37C820BC2CCFE332006BF393 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		37CA554E2CD3CE950031E65A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		37CA55522CD3CEC80031E65A /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		37CA55542CD3CED40031E65A /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		37CF9B102CAEB82C0073EF02 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		37CF9B132CAEE6500073EF02 /* HowToGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToGuideView.swift; sourceTree = "<group>"; };
 		37CF9B152CAEE6790073EF02 /* ItemsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsInfoView.swift; sourceTree = "<group>"; };
@@ -93,6 +99,7 @@
 		37BD9EBC2CAC4663004040D2 /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
 		37BD9EC52CAC4721004040D2 /* Networking */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Networking; sourceTree = "<group>"; };
 		37BD9EC92CAC47AD004040D2 /* ViewModels */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModels; sourceTree = "<group>"; };
+		37CA55562CD3D0D10031E65A /* Managers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Managers; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +186,7 @@
 		378CAA912C76030D005A628F /* TrialApp */ = {
 			isa = PBXGroup;
 			children = (
+				37CA55562CD3D0D10031E65A /* Managers */,
 				378CAA922C76030D005A628F /* TrialAppApp.swift */,
 				37BD9EC92CAC47AD004040D2 /* ViewModels */,
 				37BD9EC52CAC4721004040D2 /* Networking */,
@@ -239,6 +247,9 @@
 		37CF9B192CAEE7360073EF02 /* Profile Views */ = {
 			isa = PBXGroup;
 			children = (
+				37CA55542CD3CED40031E65A /* PrivacyPolicyView.swift */,
+				37CA55522CD3CEC80031E65A /* ChangePasswordView.swift */,
+				37CA554E2CD3CE950031E65A /* SettingsView.swift */,
 				37638C1E2CADB43E00BD3DAA /* ProfileView.swift */,
 			);
 			path = "Profile Views";
@@ -308,6 +319,7 @@
 				37BD9EBC2CAC4663004040D2 /* Models */,
 				37BD9EC52CAC4721004040D2 /* Networking */,
 				37BD9EC92CAC47AD004040D2 /* ViewModels */,
+				37CA55562CD3D0D10031E65A /* Managers */,
 			);
 			name = TrialApp;
 			productName = TrialApp;
@@ -426,6 +438,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37BD9EEB2CAC8210004040D2 /* CraftingView.swift in Sources */,
+				37CA55552CD3CED40031E65A /* PrivacyPolicyView.swift in Sources */,
 				378CAA952C76030D005A628F /* ContentView.swift in Sources */,
 				37BD9F032CAC91F7004040D2 /* ToolDetailView.swift in Sources */,
 				37BD9EDF2CAC5F59004040D2 /* CategoryDetailView.swift in Sources */,
@@ -433,6 +446,8 @@
 				37BD9EDA2CAC4B24004040D2 /* ProgressBar.swift in Sources */,
 				377D026F2CC7FABE00C88DC9 /* SearchBar.swift in Sources */,
 				378CAA932C76030D005A628F /* TrialAppApp.swift in Sources */,
+				37CA55532CD3CEC80031E65A /* ChangePasswordView.swift in Sources */,
+				37CA554F2CD3CE950031E65A /* SettingsView.swift in Sources */,
 				37BD9ED42CAC48C1004040D2 /* AuthenticationView.swift in Sources */,
 				37BD9ED62CAC496C004040D2 /* MainTabView.swift in Sources */,
 				373DCB142CB41F3A00D35819 /* MarketView.swift in Sources */,
@@ -607,26 +622,28 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrialApp/Preview Content\"";
-				DEVELOPMENT_TEAM = DG2N2T855J;
+				DEVELOPMENT_TEAM = X5V54N4J4U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrialApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = emiran.TrialApp;
+				PRODUCT_BUNDLE_IDENTIFIER = emiran.TrialAppV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -638,6 +655,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrialApp/Preview Content\"";
@@ -648,9 +666,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -658,6 +676,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = emiran.TrialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

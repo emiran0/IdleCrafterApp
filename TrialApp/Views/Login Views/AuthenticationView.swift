@@ -12,6 +12,7 @@ struct AuthenticationView: View {
     @State private var username = ""
     @State private var email = ""
     @State private var password = ""
+    @State private var isPasswordInvisible = true
 
     var body: some View {
         VStack {
@@ -33,17 +34,46 @@ struct AuthenticationView: View {
                     .autocapitalization(.none)
                     .padding()
                     .background(Color(.secondarySystemBackground))
+                    .cornerRadius(8)
             }
 
             TextField("Username", text: $username)
                 .autocapitalization(.none)
                 .padding()
                 .background(Color(.secondarySystemBackground))
-
-            SecureField("Password", text: $password)
-                .padding()
-                .background(Color(.secondarySystemBackground))
-
+                .cornerRadius(8)
+            
+            ZStack(alignment: .trailing){
+                
+                if isPasswordInvisible{
+                    SecureField("Password", text: $password)
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    
+                    Button(action: {
+                        isPasswordInvisible.toggle()
+                    }) {
+                        Image(systemName: isPasswordInvisible ? "eye.slash.fill" : "eye.fill")
+                            .foregroundStyle(.secondary)
+                    }
+                        .padding()
+                } else {
+                    TextField("Password", text: $password)
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    
+                    Button(action: {
+                        isPasswordInvisible.toggle()
+                    }) {
+                        Image(systemName: isPasswordInvisible ? "eye.slash.fill" : "eye.fill")
+                            .foregroundStyle(.secondary)
+                    }
+                        .padding()
+                    
+                }
+            }
             Button(action: {
                 if isLoginMode {
                     viewModel.login(username: username, password: password)
@@ -59,7 +89,16 @@ struct AuthenticationView: View {
                     .cornerRadius(8)
             }
             .padding()
-
+            
+            Button(action: {
+                
+            }) {
+                Text("Forgot Password?")
+                    .foregroundColor(.blue)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .font(.footnote)
+            }
             // Remove or comment out the inline error message if desired
             /*
             if let errorMessage = viewModel.errorMessage {
