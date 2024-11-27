@@ -15,10 +15,6 @@ struct CraftingView: View {
             if viewModel.isLoading {
                 ProgressView("Loading...")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if let errorMessage = viewModel.errorMessage {
-                Text("Error: \(errorMessage)")
-                    .foregroundColor(.red)
-                    .padding()
             } else {
                 VStack {
                     CategoryTopBoxView(
@@ -32,9 +28,20 @@ struct CraftingView: View {
                     
                     List(viewModel.craftableTools) { tool in
                         VStack(alignment: .leading) {
-                            Text(tool.displayName)
-                                .font(.headline)
-                                .foregroundColor(Color.primary)
+                            HStack {
+                                Text(tool.displayName)
+                                    .font(.headline)
+                                    .foregroundColor(Color.primary)
+                                Text("Tool Tier: \(tool.tier)")
+                                    .foregroundStyle(Color.primary)
+                                    .padding(8)
+                                    .font(.subheadline)
+                                Spacer()
+                                Text("\(tool.category)")
+                                    .foregroundStyle(Color.primary)
+                                    .padding(8)
+                                    .font(.subheadline)
+                            }
                             ForEach(tool.requiredItems) { item in
                                 HStack {
                                     Text(item.itemDisplayName)
@@ -45,16 +52,21 @@ struct CraftingView: View {
                                 }
                                 .font(.subheadline)
                             }
-                            Button(action: {
-                                viewModel.craftTool(toolUniqueName: tool.uniqueToolName)
-                            }) {
-                                Text("Craft")
-                                    .foregroundStyle(Color.primary)
-                                    .padding(8)
-                                    .background(.blue)
-                                    .cornerRadius(6)
+                            HStack{
+                                Spacer()
+                                Button(action: {
+                                    viewModel.craftTool(toolUniqueName: tool.uniqueToolName, toolTier: tool.tier)
+                                }) {
+                                    Text("Craft")
+                                        .foregroundStyle(Color.primary)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 5)
+                                        .background(.blue)
+                                        .cornerRadius(6)
+                                }
+                                .padding(.top, 5)
+                                Spacer()
                             }
-                            .padding(.top, 5)
                         }
                         .padding(.vertical, 5)
                     }

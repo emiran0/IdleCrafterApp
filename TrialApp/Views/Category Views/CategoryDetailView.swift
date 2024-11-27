@@ -109,7 +109,7 @@ struct CategoryDetailView: View {
     }
     
     private func startTimer() {
-        timerCancellable = Timer.publish(every: 5, on: .main, in: .common)
+        timerCancellable = Timer.publish(every: 3, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 viewModel.fetchData()

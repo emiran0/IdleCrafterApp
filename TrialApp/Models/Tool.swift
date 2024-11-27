@@ -10,6 +10,7 @@ struct ToolData: Codable, Identifiable {
     let id = UUID()
     let uniqueToolName: String
     let displayName: String
+    let toolID: Int?
     let isRepeating: Bool?
     var isEnabled: Bool?
     let isOccupied: Bool?
@@ -26,6 +27,7 @@ struct ToolData: Codable, Identifiable {
     enum CodingKeys: String, CodingKey {
         case uniqueToolName = "unique_tool_name"
         case displayName = "display_name"
+        case toolID = "ToolId"
         case isRepeating = "isRepeating"
         case isEnabled = "isEnabled"
         case isOccupied = "isOccupied"

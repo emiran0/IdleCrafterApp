@@ -77,6 +77,12 @@ struct ProfileView: View {
 
                                 Section(header: Text("Account Details")) {
                                     HStack {
+                                        Text("Total Level")
+                                        Spacer()
+                                        Text("\(profile.totalLevel)")
+                                            .foregroundColor(.secondary)
+                                    }
+                                    HStack {
                                         Text("Gold")
                                         Spacer()
                                         Text("\(profile.gold, specifier: "%.0f")")

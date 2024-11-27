@@ -38,7 +38,7 @@ class UserToolsViewModel: ObservableObject {
     }
 
     func startTimer() {
-        timer = Timer.publish(every: 5, on: .main, in: .common)
+        timer = Timer.publish(every: 3, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 self.fetchUserTools()

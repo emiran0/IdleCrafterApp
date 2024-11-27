@@ -17,7 +17,7 @@ struct ToolDetailView: View {
                 Image(tool.iconName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 70, height: 70)
+                    .frame(width: 90, height: 90)
                     .padding(8)
                     .padding(8)
                     .background(
@@ -34,6 +34,8 @@ struct ToolDetailView: View {
                     Text("Status: \(tool.isEnabled == true ? "Enabled" : "Disabled")")
                         .padding(.bottom, 10)
                     Text("Occupied: \(tool.isOccupied == true ? "In Use" : "Ready")")
+                        .padding(.bottom, 10)
+                    Text("Tool ID: \(tool.toolID ?? 1)")
                         .padding(.bottom, 10)
                 }
             }

@@ -38,13 +38,15 @@ class CraftingViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func craftTool(toolUniqueName: String, toolTier: Int = 1) {
+    func craftTool(toolUniqueName: String, toolTier: Int) {
         NetworkManager.shared.craftTool(toolUniqueName: toolUniqueName, toolTier: toolTier)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    self.alertMessage = "\(self.errorMessage ?? "")"
+                    self.showAlert = true
                     print("Error crafting tool: \(error)")
                 case .finished:
                     print("Successfully crafted tool: \(toolUniqueName)")

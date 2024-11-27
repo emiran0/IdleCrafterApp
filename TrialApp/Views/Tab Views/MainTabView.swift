@@ -27,6 +27,7 @@ struct MainTabView: View {
                 Image(systemName: "message.fill")
                 Text("Chat")
             }
+            .tag(1)
 
             CategoryView()
                 .tabItem {
